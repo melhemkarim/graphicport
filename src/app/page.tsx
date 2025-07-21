@@ -7,8 +7,13 @@ import { Kelly_Slab } from 'next/font/google';
 import { useState } from 'react';
 
 const kellySlab = Kelly_Slab({ subsets: ['latin'], weight: '400' });
-
-const works = [
+type Work = {
+  title: string;
+  description: string;
+  cover: string;
+  images: string[];
+};
+const works: Work[] = [
   {
     title: 'Roadster Diner',
     description: 'A redesign for Roadster website',
@@ -111,7 +116,7 @@ const logo = [
 ];
 
 export default function Home() {
-  const [selectedWork, setSelectedWork] = useState(null);
+  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   return (
     <div className={`relative min-h-screen bg-white text-black ${kellySlab.className}`}>
@@ -270,7 +275,7 @@ export default function Home() {
       </footer>
 
       {/* Popup Modal */}
-      {selectedWork && (
+      {selectedWork !== null && (
         <>
           <div className="fixed inset-0 backdrop-blur-md bg-transparent z-40" />
           <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
